@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erandi Book Shop</title>
+    <style>
+        /* Base Styles & Typography */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        
+        /* Header Section */
+        header {
+            background-color: #ffffff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #800000; /* A professional maroon color */
+        }
+        
+        .search-bar {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .header-whatsapp {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 5%;
+            text-align: center;
+        }
+        
+        nav a {
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        nav a:hover { color: #ccc; }
+
+        /* Hero Banner */
+        .hero {
+            background-color: #800000;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* Main Content Container */
+        .container {
+            padding: 40px 5%;
+        }
+
+        h2 { border-bottom: 2px solid #800000; padding-bottom: 5px; display: inline-block; }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .btn-inquire {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 12px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Erandi Book Shop</div>
+        <input type="text" class="search-bar" placeholder="🔍 Search for items...">
+        <a href="https://wa.me/94768202989" class="header-whatsapp" target="_blank">📱 WhatsApp Us</a>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#inventory">Stationery</a>
+        <a href="#tuition">Academic Materials</a>
+        <a href="#services">Services</a>
+    </nav>
+
+    <div class="hero">
+        <h1>Sharp Printing, Photocopying & Stationery</h1>
+        <p>Your trusted local bookshop in Kaluaggala.</p>
+    </div>
+
+    <div class="container">
+        <h2 id="inventory">Current Stationery Prices</h2>
+        <p><em>(These items will load directly from your Google Sheet)</em></p>
+        <div class="grid" id="sheet-data">
+            <div class="card">Loading inventory...</div>
+        </div>
+
+        <br><br>
+
+        <h2 id="tuition">Academic & Tuition Materials</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Economics</h3>
+                <p>Past papers, graph books, and study guides.</p>
+                <a href="#" onclick="sendWhatsApp('Economics Materials')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>Business Studies</h3>
+                <p>Ledgers, business plan templates, and notes.</p>
+                <a href="#" onclick="sendWhatsApp('Business Studies Materials')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>History</h3>
+                <p>Map books, timelines, and reference texts.</p>
+                <a href="#" onclick="sendWhatsApp('History Materials')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>Political Science & Media</h3>
+                <p>Curated reading materials and exercise books.</p>
+                <a href="#" onclick="sendWhatsApp('Political Science & Media Materials')" class="btn-inquire">Inquire</a>
+            </div>
+        </div>
+
+        <br><br>
+
+        <h2 id="services">Our Services</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🖨️ Photocopy & Color Print</h3>
+                <p>High-quality black & white and full-color printing.</p>
+                <a href="#" onclick="sendWhatsApp('Printing Services')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>📜 Laminating</h3>
+                <p>Protect your important documents and certificates.</p>
+                <a href="#" onclick="sendWhatsApp('Laminating')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>⌨️ Typesetting</h3>
+                <p>Professional document typing and formatting.</p>
+                <a href="#" onclick="sendWhatsApp('Typesetting')" class="btn-inquire">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>📝 CVs & Invitations</h3>
+                <p>Custom designs for your resumes and special event cards.</p>
+                <a href="#" onclick="sendWhatsApp('CV or Invitation Design')" class="btn-inquire">Inquire</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="flex: 1; min-width: 250px; margin-right: 20px;">
+            <h3>Erandi Book Shop</h3>
+            <p>📍 Kaluaggala, Western Province, Sri Lanka</p>
+            <p>📞 076 820 2989</p>
+        </div>
+        <div class="map-container" style="flex: 1; min-width: 300px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4873.592907497104!2d80.09484448469024!3d6.9191243006150485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3ab0012e71d03%3A0x75e0d97a2ac4e26f!2sErandi%20Book%20Shop!5e1!3m2!1sen!2slk!4v1781428901452!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Smart WhatsApp Messaging
+        function sendWhatsApp(itemOfInterest) {
+            const phoneNumber = "94768202989";
+            const message = `Hello Erandi Book Shop, I would like to inquire about: ${itemOfInterest}.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // 2. The Google Sheets Bridge (Template)
+        // Once you set up your Google Sheet and Google Apps Script, you will paste the URL here.
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzvWy2CxrLHJYjmkiopR22P2SPsLh1D5dTfCpTQFTTxmtaDIQHWuoXmMdsZkJ7pdSaUOw/exec";
+
+        async function fetchInventory() {
+            This code is currently commented out so it doesn't cause an error before you add your URL.
+               When you are ready, you will uncomment this to pull live prices from your spreadsheet.
+               
+            try {
+                const response = await fetch(GOOGLE_SHEET_API_URL);
+                const items = await response.json();
+                
+                const grid = document.getElementById('sheet-data');
+                grid.innerHTML = ""; // Clear the "Loading..." text
+
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3>${item.Name}</h3>
+                        <p>Rs. ${item.Price}</p>
+                        <a href="#" onclick="sendWhatsApp('${item.Name}')" class="btn-inquire">Inquire</a>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Error loading inventory:", error);
+                document.getElementById('sheet-data').innerHTML = "<p>Could not load inventory at this time.</p>";
+            }
+            
+        }
+
+        // Load the inventory when the page opens
+        window.onload = fetchInventory;
+    </script>
+
+</body>
+</html>
