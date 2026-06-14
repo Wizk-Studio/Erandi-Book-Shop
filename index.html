@@ -227,9 +227,6 @@
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzvWy2CxrLHJYjmkiopR22P2SPsLh1D5dTfCpTQFTTxmtaDIQHWuoXmMdsZkJ7pdSaUOw/exec";
 
         async function fetchInventory() {
-            This code is currently commented out so it doesn't cause an error before you add your URL.
-               When you are ready, you will uncomment this to pull live prices from your spreadsheet.
-               
             try {
                 const response = await fetch(GOOGLE_SHEET_API_URL);
                 const items = await response.json();
