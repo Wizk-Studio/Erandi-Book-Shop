@@ -174,6 +174,41 @@
             border: none;
             border-radius: 8px;
         }
+        /* --- MOBILE RESPONSIVE TWEAKS (MEDIA QUERIES) --- */
+        @media (max-width: 768px) {
+            /* 1. Stack the header items vertically */
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            /* 2. Let the search bar take up the full screen width */
+            .search-container {
+                width: 100%;
+                margin: 0;
+            }
+
+            /* 3. Shrink the main title text so it fits comfortably */
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+
+            /* 4. Stack the footer text on top of the Google Map */
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .map-container {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -277,7 +312,7 @@
         </div>
         <div class="map-container" style="flex: 1; min-width: 300px;">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4873.592962282668!2d80.09714047499648!3d6.919118993080533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3ab0012e71d03%3A0x75e0d97a2ac4e26f!2sErandi%20Book%20Shop!5e1!3m2!1sen!2slk!4v1781517500473!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
+    </div></footer>
 
     <script>
         // 1. Smart WhatsApp Messaging
