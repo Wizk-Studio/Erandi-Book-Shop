@@ -323,53 +323,73 @@
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        // 2. The Google Sheets Bridge (Template)
-        // Once you set up your Google Sheet and Google Apps Script, you will paste the URL here.
+        // 2. The Google Sheets Bridge
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzvWy2CxrLHJYjmkiopR22P2SPsLh1D5dTfCpTQFTTxmtaDIQHWuoXmMdsZkJ7pdSaUOw/exec";
 
+        // 3. The Ultimate Speed-Hack & Image Loader
         async function fetchInventory() {
+            const grid = document.getElementById('sheet-data');
+            
+            // SPEED HACK: Check the browser's local memory first
+            const cachedData = localStorage.getItem('erandiInventory');
+            if (cachedData) {
+                // Instantly display saved data
+                renderItems(JSON.parse(cachedData), grid);
+            }
+
+            // Fetch fresh data from Google Sheets in the background
             try {
                 const response = await fetch(GOOGLE_SHEET_API_URL);
                 const items = await response.json();
                 
-                const grid = document.getElementById('sheet-data');
-                grid.innerHTML = ""; // Clear the "Loading..." text
-
-                items.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <h3>${item.Name}</h3>
-                        <p>Rs. ${item.Price}</p>
-                        <a href="#" onclick="sendWhatsApp('${item.Name}')" class="btn-inquire">Inquire</a>
-                    `;
-                    grid.appendChild(card);
-                });
+                // Save the fresh data to memory for their next visit
+                localStorage.setItem('erandiInventory', JSON.stringify(items));
+                
+                // Update the screen with the live data
+                renderItems(items, grid);
             } catch (error) {
                 console.error("Error loading inventory:", error);
-                document.getElementById('sheet-data').innerHTML = "<p>Could not load inventory at this time.</p>";
+                if (!cachedData) {
+                    grid.innerHTML = "<p>Could not load inventory at this time.</p>";
+                }
             }
-            
+        }
+
+        // Helper function to draw the cards with Lazy Loading
+        function renderItems(items, gridElement) {
+            gridElement.innerHTML = ""; // Clear the loading text
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Checks the spreadsheet for an image file name and applies lazy loading
+                const imageHtml = item.Image ? `<img src="${item.Image}" alt="${item.Name}" style="width:100%; height:150px; object-fit:cover; border-radius:4px; margin-bottom:10px;" loading="lazy">` : '';
+
+                card.innerHTML = `
+                    ${imageHtml}
+                    <h3>${item.Name}</h3>
+                    <p>Rs. ${item.Price}</p>
+                    <a href="#" onclick="sendWhatsApp('${item.Name}')" class="btn-inquire">Inquire</a>
+                `;
+                gridElement.appendChild(card);
+            });
         }
 
         // Load the inventory when the page opens
         window.onload = fetchInventory;
-        // 3. Search Bar Filter Logic
+
+        // 4. Search Bar Filter Logic
         function filterSearch() {
-            // Get the text the user typed and make it lowercase
             const query = document.getElementById('searchInput').value.toLowerCase();
-            
-            // Grab every single card on the webpage
             const cards = document.querySelectorAll('.card');
 
-            // Check each card one by one
             cards.forEach(card => {
                 const cardText = card.innerText.toLowerCase();
-                
                 if (cardText.includes(query)) {
-                    card.style.display = "";     // Show the card if it matches
+                    card.style.display = "";     
                 } else {
-                    card.style.display = "none"; // Hide the card if it doesn't match
+                    card.style.display = "none"; 
                 }
             });
         }
